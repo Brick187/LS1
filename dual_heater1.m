@@ -1,5 +1,5 @@
 close all; clear all; clc
-
+tclab;
 model = 'dual_heater.slx';
 open_system(model);
 
@@ -12,8 +12,8 @@ T = 23;
 T = T + C2K;
 
 
-alfa = 0.01; 
-alfa2 = 0.0075; 
+alfa = 0.9; 
+alfa2 = 0.6; 
 
 cp = 500; 
 A = 7e-4; 
@@ -64,22 +64,21 @@ for i = 1:600
     plot(time,t1s,'r.','MarkerSize',10);
     hold on;
     plot(time,t2s,'b.','MarkerSize',10);
-    legend('Temperature 1','Temperature 2','Location','NorthWest');
-    plot(time,h1s,'r-','LineWidth',2);
-    plot(time,h2s,'b--','LineWidth',2);
     plot(T1.time,T1.signals.values);
     yyaxis right;
-    ylabel('Temperature (degC)');
+    plot(time,h1s,'o-','LineWidth',1);
+    plot(time,h2s,'c-','LineWidth',1);
+    ylabel('Heater (%)');
     yyaxis left;
-    ylabel('Heater (0-5.5 V)');
+    ylabel('Temperature (degC)');
     xlabel('Time (sec)');
-    legend('Heater 1','Heater 2','Location','NorthWest');
+    legend('Temperature 1','Temperature 2','Temp 1 pred', 'Temp 2 pred','Heater 1','Heater 2', 'Location','SouthEast');
     drawnow;
     t = toc;
     pause(max(0.01,1.0-t));
 end
 
-disp('Turn off heaters')
+%%
 h1(0);
 h2(0);
 
