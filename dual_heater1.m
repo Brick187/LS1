@@ -22,7 +22,7 @@ As = 5e-4;
 m = 4e-3; 
 U = 10;
 eps = 0.5; 
-sigma = 5.67e-8;
+sig = 5.67e-8;
 
 simOut = sim(model);
 T1= simOut.get('simout');
